@@ -1,0 +1,209 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --leaf: #2d6a3e;
+  --leaf-dark: #1e4a2b;
+  --tomato: #d9481f;
+  --ink: #1d2a20;
+  --muted: #5f6f63;
+  --page: #f3f6f1;
+  --white: #ffffff;
+  --radius: 14px;
+  --shadow: 0 2px 8px rgba(29, 42, 32, 0.08);
+  --shadow-hover: 0 18px 34px rgba(29, 42, 32, 0.2);
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Figtree", "Segoe UI", Arial, sans-serif;
+  background: var(--page);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--leaf);
+  color: var(--white);
+  padding: clamp(28px, 6vw, 56px) 20px;
+  text-align: center;
+}
+
+.logo {
+  font-family: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  opacity: 0.9;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.section-title {
+  font-family: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  margin-bottom: 24px;
+}
+
+/* ---------- Responsive grid (no media queries) ----------
+   auto-fit creates as many columns as fit in the row.
+   minmax(250px, 1fr): each card is at least 250px wide
+   and grows equally to fill leftover space. */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+/* ---------- Card ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-img {
+  height: 200px;
+  overflow: hidden;
+  background: #dfe8dc;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .card-img img {
+  transform: scale(1.1);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px;
+}
+
+.card-title {
+  font-family: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.card-desc {
+  margin-top: 4px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--tomato);
+}
+
+/* ---------- Button ---------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--leaf);
+  background: transparent;
+  color: var(--leaf);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 0;
+  transition: color 0.3s ease, transform 0.15s ease;
+}
+
+/* fill slides in from the left on hover */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--leaf);
+  transform: translateX(-101%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.card:hover .btn::before,
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translateX(0);
+}
+
+.card:hover .btn,
+.btn:hover,
+.btn:focus-visible {
+  color: var(--white);
+}
+
+.btn:active {
+  transform: scale(0.94);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--tomato);
+  outline-offset: 2px;
+}
+
+/* ---------- Image fallback ---------- */
+.img-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--leaf-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}
